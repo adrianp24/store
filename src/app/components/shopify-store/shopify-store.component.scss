@@ -1,0 +1,15 @@
+app-shopify-product {
+    flex: 0 0 385px;
+    cursor: pointer;
+    height: 333px;
+}
+
+.product-list-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    margin: 25px 0 0 0;
+}

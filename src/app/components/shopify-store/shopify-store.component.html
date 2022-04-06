@@ -1,0 +1,6 @@
+<h1>SHOPIFY STORE</h1>
+
+<div class="product-list-container">
+    <app-shopify-product [model]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+    </app-shopify-product>
+</div>

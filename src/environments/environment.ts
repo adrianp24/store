@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  siteBaseUrl: 'http://localhost:4200/',
+  shopifyUrl: 'https://blackjackconsultants.myshopify.com/',
+  shopifyaccesstoken: '02d01b64bf1100357525a11c52c84367',
+  shopifyGraphQL: 'https://blackjackconsultants.myshopify.com/api/2022-01/graphql.json'
 };
 
 /*

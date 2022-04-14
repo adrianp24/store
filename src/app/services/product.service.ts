@@ -13,7 +13,6 @@ query productList($quantity: Int!){
         id
         description
         title
-        availableForSale
         totalInventory
         onlineStoreUrl
         descriptionHtml
@@ -59,53 +58,20 @@ query productList($quantity: Int!){
 const getProduct = gql`
 query GetProductsById($id: ID!) {
   product(id: $id) {
-    availableForSale
-    compareAtPriceRange {
-        maxVariantPrice {
-            amount
-            currencyCode
-        }
-        minVariantPrice {
-            amount
-            currencyCode
-        }
-    }
-    createdAt
-    description
-    descriptionHtml
-    featuredImage {
-        id
-        altText
-        height
-        url
-        width
-    }
-    handle
     id
-    onlineStoreUrl
-    options {
-        id
-        name
-        values 
-    }
-    priceRange {
-        maxVariantPrice {
-            amount
-            currencyCode
-        }
-    }
-    productType
-    publishedAt
-    requiresSellingPlan
-    seo {
-        description
-        title
-    }
-    tags
     title
-    totalInventory
-    updatedAt
-    vendor
+    description
+    variants(first: 1) {
+      edges {
+        node {
+          price
+          availableForSale
+        }
+      }
+    }
+    featuredImage {
+      url
+    }
   }
 }
 `;
@@ -142,3 +108,128 @@ export class ProductService {
 
   }
 }
+
+// query GetProductsById($id: ID!) {
+//   product(id: $id) {
+//     id
+//     title
+//     description
+//     variants(first: 1) {
+//       edges {
+//         node {
+//           price
+//           availableForSale
+//         }
+//       }
+//     }
+//     featuredImage {
+//       url
+//     }
+//   }
+// }
+
+// const getProduct = gql`
+// query GetProductsById($id: ID!) {
+//   product(id: $id) {
+//     availableForSale
+//     compareAtPriceRange {
+//         maxVariantPrice {
+//             amount
+//             currencyCode
+//         }
+//         minVariantPrice {
+//             amount
+//             currencyCode
+//         }
+//     }
+//     createdAt
+//     description
+//     descriptionHtml
+//     featuredImage {
+//         id
+//         altText
+//         height
+//         url
+//         width
+//     }
+//     handle
+//     id
+//     onlineStoreUrl
+//     options {
+//         id
+//         name
+//         values 
+//     }
+//     priceRange {
+//         maxVariantPrice {
+//             amount
+//             currencyCode
+//         }
+//     }
+//     productType
+//     publishedAt
+//     requiresSellingPlan
+//     seo {
+//         description
+//         title
+//     }
+//     tags
+//     title
+//     totalInventory
+//     updatedAt
+//     vendor
+//   }
+// }
+// `;
+
+// const getProductList = gql`
+// query productList($quantity: Int!){
+//   products(first: $quantity) {
+//     edges {
+//       node {
+//         id
+//         description
+//         title
+//         availableForSale
+//         totalInventory
+//         onlineStoreUrl
+//         descriptionHtml
+//         publishedAt
+//         vendor
+//         productType
+//          variants(first:10)
+//         {
+//           edges
+//           {
+//             node
+//             {
+//               availableForSale
+//               id
+//               compareAtPrice
+//               price
+//               title
+//             }
+//           }
+//         }
+//         priceRange {
+//             minVariantPrice {
+//                 amount
+//                 currencyCode
+//             }
+//             maxVariantPrice {
+//                 amount
+//                 currencyCode
+//             }
+//         }
+//         featuredImage {
+//           id
+//           url
+//           width
+//           height
+//           altText
+//         }
+//       }
+//     }
+//   }
+// }
+// `;

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Variant } from 'src/app/models/variant';
 import { Product } from '../../models/product';
 
 @Component({
@@ -9,8 +10,8 @@ import { Product } from '../../models/product';
 export class ShopifyProductComponent implements OnInit {
 
   @Input()
-  model: Product | undefined;
-  
+  product!: Product;
+
   constructor() { }
 
   ngOnInit(): void {

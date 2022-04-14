@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { Variant } from 'src/app/models/variant';
 import { ProductService } from '../../services/product.service'
 
 @Component({
@@ -10,14 +11,15 @@ import { ProductService } from '../../services/product.service'
   styleUrls: ['./shopify-product-details.component.scss']
 })
 export class ShopifyProductDetailsComponent implements OnInit {
+  variant!: Variant | undefined;
   model: Product | undefined;
-  product: any;
+  product!: Product;
   id!: string;
   sub: any;
 
-  
+
   constructor(private route: ActivatedRoute,
-              private productService: ProductService) { }
+    private productService: ProductService) { }
 
   ngOnInit(): void {
 
@@ -26,7 +28,10 @@ export class ShopifyProductDetailsComponent implements OnInit {
       this.id = params['id'];
       this.productService.getProduct(this.id).subscribe(result => {
         let d: any = result.data;
-        this.product = d.product;
+        this.product = new Product(d.product);
+        this.variant = this.product.variants[0] ;
+        console.log(`This is in the node ${this.variant.price}`)
+
       });
     }, (err) => {
       console.error(err)

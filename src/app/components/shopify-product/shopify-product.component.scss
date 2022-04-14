@@ -1,8 +1,10 @@
 ::ng-deep app-shopify-product {
     display: grid;
-    grid-template-columns: 15% 70% 15%;
-    grid-template-rows: 70% 25% 5%;
-    grid-gap: 20px;
+    // grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 80% 18% 5%;
+    // grid-gap: 1px;
+    width: 100%;
+    height: 100%;
 }
 
 img {
@@ -10,8 +12,9 @@ img {
     grid-row-end: 2;
     grid-column-start: 2;
     grid-column-end: 3;
-    width: 100%;
+    width: 275px;
     height: 100%;
+    // display: block;
 }
 
 .title {
@@ -19,7 +22,8 @@ img {
     grid-row-end: 3;
     grid-column-start: 2;
     grid-column-end: 3;
-
+    padding-top: 17px;
+    font-size: 18px;
 }
 
 .price {
@@ -27,4 +31,5 @@ img {
     grid-row-end: 4;
     grid-column-start: 2;
     grid-column-end: 3;
+    padding-top: 10px;
 }

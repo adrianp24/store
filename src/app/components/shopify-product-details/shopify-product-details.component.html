@@ -1,10 +1,22 @@
-<div class="title">
-    Title: {{product.title}}
-</div>
-<div class="image">
-    <img [src]="product?.featuredImage?.url">
-</div><br>
+<div class="product-details-container">
 
-<div>
-    {{product.price}}
+    <!-- <h1 class="header">Cool Things To Buy</h1> -->
+
+    <div class="title">
+        {{product?.title}}
+    </div><br>
+
+    <!--     <div class="image"> -->
+    <div class="image">
+        <img class="image" [src]="product?.featuredImage?.url">
+    </div><br>
+
+    <div class="price">
+        Price:{{variant?.price}}
+
+    </div>
+
+    <div class="description">
+        {{product.description}}
+    </div>
 </div>

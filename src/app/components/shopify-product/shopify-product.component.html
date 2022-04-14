@@ -1,2 +1,3 @@
-<img [src]="model?.featuredImage?.url">
-<div class="title">{{ model?.title }} {{model?.price}} </div>
+<img [src]="product?.featuredImage?.url">
+<div class="title">{{ product?.title }} </div>
+<div class="price">{{ product.variants[0].price }} </div>

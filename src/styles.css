@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    background-color: rgb(34, 32, 32);
+    color: whitesmoke;
+    margin: 0;
+    padding: 0;
+}

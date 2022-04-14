@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { Variant } from 'src/app/models/variant';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service'
 
@@ -10,6 +11,7 @@ import { ProductService } from '../../services/product.service'
 })
 export class ShopifyStoreComponent implements OnInit {
   products: Product[] = [];
+  // variants: Variant[] = [];
 
   constructor(
     private productService: ProductService) { }
@@ -20,8 +22,23 @@ export class ShopifyStoreComponent implements OnInit {
       let products: any = d.products;
       let edges: any = products.edges;
       for (const edge of edges) {
-        this.products.push(new Product(edge.node));
+        let product = new Product(edge.node);
+        this.products.push(product);
+        // let variantEdges = product
+        // for (const edge of ede) {
+        //   product.variant
+        // }
       }
+
+      ////////////
+      // let variantNodee = d.variants.edge;
+
+      // for (let i = 0; i < variantNodee[i].node; i++) {
+      // this.variants.push(new Variant())
+        
+      // }
+      // let variantNode = this.product.variants.edges
+      // this.variant = variantNode ;
     });
 
   }

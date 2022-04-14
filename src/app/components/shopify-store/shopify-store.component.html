@@ -1,6 +1,10 @@
-<h1>SHOPIFY STORE</h1>
+<div class="store-container">
+    <div class="paragraph-container">Welcome to infinite list of cool things to buy/cool stuff to buy. We have create an awesome list for you so that you can buy perfect and cool stuff or gift for your love one. Wheather you are looking to buy something for yourself or someone else,
+        just explore our site.
+    </div>
 
-<div class="product-list-container">
-    <app-shopify-product [model]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
-    </app-shopify-product>
+    <div class="product-list-container">
+        <app-shopify-product [product]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+        </app-shopify-product>
+    </div>
 </div>

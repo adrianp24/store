@@ -9,6 +9,7 @@ import { ShopifyProductDetailsComponent } from './components/shopify-product-det
 import { ShopifyStoreComponent } from './components/shopify-store/shopify-store.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { ContactComponent } from './components/shopify-contact/contact/contact.component';
 
 
 
@@ -17,7 +18,8 @@ import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
     AppComponent,
     ShopifyStoreComponent,
     ShopifyProductComponent,
-    ShopifyProductDetailsComponent
+    ShopifyProductDetailsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

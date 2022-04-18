@@ -9,6 +9,10 @@ app-shopify-product {
     height: 333px;
 }
 
+.hover:hover {
+    text-decoration: underline;
+}
+
 .product-list-container {
     margin-top: 1%;
     display: grid;

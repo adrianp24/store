@@ -4,7 +4,7 @@
     </div>
 
     <div class="product-list-container">
-        <app-shopify-product [product]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+        <app-shopify-product class="hover" [product]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
         </app-shopify-product>
     </div>
 </div>

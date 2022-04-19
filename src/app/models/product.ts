@@ -10,6 +10,7 @@ export class Product {
     onlineStoreUrl!: string;
     featuredImage!: Image;
     variants: Variant[] = [];
+    
 
     constructor(product?: any) {
         this.id = product.id;

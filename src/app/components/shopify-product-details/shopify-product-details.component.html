@@ -1,22 +1,45 @@
 <div class="product-details-container">
 
-    <!-- <h1 class="header">Cool Things To Buy</h1> -->
 
-    <div class="title">
-        {{product?.title}}
-    </div><br>
 
-    <!--     <div class="image"> -->
+    <div class="product-details-block">
+        <div class="title">
+            {{product?.title}}
+        </div><br>
+
+        <div class="price">
+            Price: ${{variant?.price}} USD <br>
+            <div class="shipping-detail"> Shipping is calculated at checkout.</div>
+
+        </div>
+
+
+
+        <div class="quantity buttons_added">
+
+            <div id="quantity-title">Quantity</div>
+            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+        </div>
+
+        <div>
+            <input class="add-to-cart hover" value="Add to cart" onclick="alert('add to cart')">
+        </div>
+
+        <p class="description">
+            {{product?.description}}
+        </p>
+
+    </div>
+
+
     <div class="image">
         <img class="image" [src]="product?.featuredImage?.url">
     </div><br>
 
-    <div class="price">
-        Price:{{variant?.price}}
+    <div class="images-not-featured" *ngIf="product?.images!=undefined">
+        <img *ngIf="product.images[0]" class="images-not-featured-0" [src]="product.images[0]?.url ">
+        <img *ngIf="product.images[1]" class="images-not-featured-1" [src]="product.images[1]?.url ">
 
     </div>
 
-    <div class="description">
-        {{product.description}}
-    </div>
 </div>

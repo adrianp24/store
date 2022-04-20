@@ -1,4 +1,3 @@
-import { Currency } from "./currency";
 import { Image } from "./image";
 import { Variant } from "./variant";
 
@@ -10,7 +9,7 @@ export class Product {
     onlineStoreUrl!: string;
     featuredImage!: Image;
     variants: Variant[] = [];
-    
+    images: Image[] = [];
 
     constructor(product?: any) {
         this.id = product.id;
@@ -19,6 +18,14 @@ export class Product {
         this.availableForSale = product.availableForSale;
         this.onlineStoreUrl = product.onlineStoreUrl;
         this.featuredImage = product.featuredImage;
+        // error only  
+        if ( product.images != undefined) {
+            for (const image of product?.images?.edges) {
+                this.images.push(new Image(image.node))
+            }
+        }
+       
+
         for (const edge of product.variants.edges) {
             let variant = new Variant(edge.node);
             this.variants.push(variant);

@@ -1,6 +1,7 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Image } from 'src/app/models/image';
 import { Product } from 'src/app/models/product';
 import { Variant } from 'src/app/models/variant';
 import { ProductService } from '../../services/product.service'
@@ -16,6 +17,7 @@ export class ShopifyProductDetailsComponent implements OnInit {
   product!: Product;
   id!: string;
   sub: any;
+  images: Image[] = []
 
 
   constructor(private route: ActivatedRoute,
@@ -29,13 +31,16 @@ export class ShopifyProductDetailsComponent implements OnInit {
       this.productService.getProduct(this.id).subscribe(result => {
         let d: any = result.data;
         this.product = new Product(d.product);
-        this.variant = this.product.variants[0] ;
+        this.variant = this.product.variants[0];
+        this.images = this.product.images;
         console.log(`This is in the node ${this.variant.price}`)
-
+        console.log(` images link:${this.images[0].url}`)
+        console.log('finished loading products');
       });
     }, (err) => {
       console.error(err)
     });
+    console.log('finished initializing');
   }
 
 }

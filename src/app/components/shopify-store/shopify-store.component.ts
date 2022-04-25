@@ -41,5 +41,6 @@ export class ShopifyStoreComponent implements OnInit {
       // this.variant = variantNode ;
     });
 
+ 
   }
 }

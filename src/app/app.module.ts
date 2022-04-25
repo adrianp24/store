@@ -10,6 +10,7 @@ import { ShopifyStoreComponent } from './components/shopify-store/shopify-store.
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { ContactComponent } from './components/shopify-contact/contact/contact.component';
+import { ShopifyCartComponent } from './components/shopify-cart/shopify-cart/shopify-cart.component';
 
 
 
@@ -19,7 +20,8 @@ import { ContactComponent } from './components/shopify-contact/contact/contact.c
     ShopifyStoreComponent,
     ShopifyProductComponent,
     ShopifyProductDetailsComponent,
-    ContactComponent
+    ContactComponent,
+    ShopifyCartComponent
   ],
   imports: [
     BrowserModule,

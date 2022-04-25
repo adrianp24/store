@@ -1,9 +1,11 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Cart } from 'src/app/models/cart';
 import { Image } from 'src/app/models/image';
 import { Product } from 'src/app/models/product';
 import { Variant } from 'src/app/models/variant';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from '../../services/product.service'
 
 @Component({
@@ -18,10 +20,11 @@ export class ShopifyProductDetailsComponent implements OnInit {
   id!: string;
   sub: any;
   images: Image[] = []
+  localCartData!: Cart;
 
 
   constructor(private route: ActivatedRoute,
-    private productService: ProductService) { }
+    private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit(): void {
 
@@ -42,5 +45,23 @@ export class ShopifyProductDetailsComponent implements OnInit {
     });
     console.log('finished initializing');
   }
+
+  onAddToCartClick() {
+    // if no cart exist createCart()
+    // if cart exist add to cart with id to api
+  }
+
+  createCart() {
+    this.cartService.insertNewCart().subscribe(result => {
+      let c: any = result.data.cartCreate.cart;
+      this.localCartData = new Cart(c);
+      console.log(`${this.localCartData.checkoutUrl}`)
+    })
+  }
+
+  addToCart () {
+
+  }
+
 
 }

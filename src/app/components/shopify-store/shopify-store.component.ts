@@ -24,23 +24,7 @@ export class ShopifyStoreComponent implements OnInit {
       for (const edge of edges) {
         let product = new Product(edge.node);
         this.products.push(product);
-        // let variantEdges = product
-        // for (const edge of ede) {
-        //   product.variant
-        // }
       }
-
-      ////////////
-      // let variantNodee = d.variants.edge;
-
-      // for (let i = 0; i < variantNodee[i].node; i++) {
-      // this.variants.push(new Variant())
-        
-      // }
-      // let variantNode = this.product.variants.edges
-      // this.variant = variantNode ;
     });
-
- 
   }
 }

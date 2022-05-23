@@ -10,6 +10,9 @@ export class Product {
     featuredImage!: Image;
     variants: Variant[] = [];
     images: Image[] = [];
+    price!: number;
+    quantity?: number;
+    cartLineId: string;
 
     constructor(product?: any) {
         this.id = product.id;
@@ -18,17 +21,27 @@ export class Product {
         this.availableForSale = product.availableForSale;
         this.onlineStoreUrl = product.onlineStoreUrl;
         this.featuredImage = product.featuredImage;
+        this.quantity = product.quantity;
+        this.cartLineId = product.cartLineId;
         // error only  
-        if ( product.images != undefined) {
+        if (product.images != undefined) {
             for (const image of product?.images?.edges) {
                 this.images.push(new Image(image.node))
             }
         }
-       
 
-        for (const edge of product.variants.edges) {
-            let variant = new Variant(edge.node);
-            this.variants.push(variant);
+        if (product.variants != undefined) {
+            for (const edge of product.variants.edges) {
+                let variant = new Variant(edge.node);
+                this.variants.push(variant);
+            }
+        }
+
+        if (product.variants != undefined) {
+            for (const edge of product.variants.edges) {
+                this.price = edge.node.price
+                return
+            }
         }
     }
 }

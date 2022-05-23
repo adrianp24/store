@@ -66,6 +66,7 @@ query GetProductsById($id: ID!) {
     variants(first: 10) {
       edges {
         node {
+          id
           price
           availableForSale
           title

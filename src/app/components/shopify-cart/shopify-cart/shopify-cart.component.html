@@ -1,7 +1,32 @@
-<div class="parent-cart-container">
-    <div class="child-cart-containter">
-        <div>Your cart</div>
-        <div>Continue shopping</div>
+<div class="cart-container">
+    <div class="cart-header">
+        Your Cart
+    </div>
+
+    <div class="continue-shopping">
+        <a class="continue-shopping link" routerLink="/store">Continue Shopping</a>
+    </div>
+
+    <div class="product-list-container">
+        <!-- <div class="product-list-header">
+            product
+        </div> -->
+        <div class="product" *ngFor="let product of cart?.lines; let i = index">
+            <div class="product-title hover" [routerLink]="['/product', product.id]">{{product.title}}</div>
+            <img class="product-img" [src]="product?.featuredImage?.url">
+            <div class="product-price">${{product.price}}</div>
+            <button class="product-delete" (click)="onDeleteFromCart(i)">delete</button>
+            <div class="quantity buttons_added">
+                <div id="quantity-title">Quantity</div>
+                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+            </div>
+            <!-- <img class="product-delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8AAABYWFhhYWGcnJzV1dU8PDzS0tI+Pj5kZGTp6emWlpahoaFZWVnx8fFpaWktLS329va5ublzc3NDQ0MSEhKGhoZHR0eurq6/v78ODg43NzeBgYEoKCgjIyN7e3upCk8PAAAB40lEQVR4nO3Y6W6bQACFUWw3ITFZyb40ef+3DEVRlV+VZTNzoT7fC3iOLmKQm0aSJElH2vl6v87TB9+1s9W+naaPvlunewMXQtx/wYUQD1lwEcTDFlwA8dAFZ0+cAjhr4uGP6MyJ0yw4Y+JUC1Ynbrtfu3RxPyFwtbq/2OlXu+0EwnbSk09dO4HwJI34ZyeEhITxCAkJ8xESEuYjJCTMR0h4HML//58oSZIkLa3LzRy6LChMf2d/R0hImI+QkDAfISFhPkJCwnyEhIT5CAkJ8xESEuYjJCTMR0hImI+QkDAfISFhPkJCwnyEhIT5CAkJ8xESEuYjJCTMR0hImI+QkDAfISFhPkJCwnyEhIT5CAkJ8xESEuYjJCTMR0hImI+QkDAfISFhPkJCwnyEhIT5CAkJ8xESEuYjJCTMR0hImI+Q8KiFD2nb2ENB4TqNG1sXFD6mcWOPBYV9Gjf2UlB4lcaNXRUUNk9p3dBTSWDznOYNPRcVzuFGLAtsurRv1RUW5kcsDWxewsCSV8V311HgdXlg09wEgTc1gNFrv+hl/4P4GvK9VgI2ze1bBPh2Wws49B4Avlf0DbW13ze/27rAof6jou+jr+77U/tZyfdZf7+/bfvubrMu1+au67c5niRJkmr1BWWsa4frg/t5AAAAAElFTkSuQmCC"
+                (click)="onDeleteFromCart(i)"> -->
+
+
+
+
+        </div><br>
     </div>
 
 

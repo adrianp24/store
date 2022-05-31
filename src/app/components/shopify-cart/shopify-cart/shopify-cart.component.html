@@ -8,19 +8,22 @@
     </div>
 
     <div class="product-list-container">
+        <table>
+            <tr *ngFor="let product of cart?.lines; let i = index">
+                <td><img class="product-img" [src]="product?.featuredImage?.url"></td>
+                <td class="product-title hover" [routerLink]="['/product', product.id]">{{product.title}}</td>
+                <td class="buttons_added">
+                    <div id="quantity-title">Quantity</div>
+                    <input class="quantity-input quantity-hover" type="number" (change)="onQuantityChange(i)" [(ngModel)]="product!.quantity" min="1" max="5">
+                </td>
+                <td><button class="product-delete" (click)="onDeleteFromCart(i)">delete</button></td>
+                <td class="product-price">${{product.price}}</td>
 
-        <div class="product" *ngFor="let product of cart?.lines; let i = index">
-            <div class="product-title hover" [routerLink]="['/product', product.id]">{{product.title}}</div>
-            <img class="product-img" [src]="product?.featuredImage?.url">
-            <div class="product-price">${{product.price}}</div>
-            <button class="product-delete" (click)="onDeleteFromCart(i)">delete</button>
 
-            <div class="quantity buttons_added">
-                <div id="quantity-title">Quantity</div>
-                <input class="quantity-input quantity-hover" type="number" (change)="onQuantityChange(i)" [(ngModel)]="product!.quantity" min="1" max="5">
-            </div>
 
-        </div><br>
+            </tr>
+        </table>
+        <br>
     </div>
 
     <div class="cart-totals-container">

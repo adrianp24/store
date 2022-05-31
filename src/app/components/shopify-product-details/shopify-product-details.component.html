@@ -18,7 +18,7 @@
         <div class="quantity buttons_added">
 
             <div id="quantity-title">Quantity</div>
-            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+            <input class="quantity-input hover" type="number" [(ngModel)]="1 || product.quantity" min="1" max="5">
         </div>
 
         <div>

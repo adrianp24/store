@@ -1,12 +1,14 @@
 import { Product } from "./product";
 
 export class Cart {
-    lines: Product[]=[];
+    lines: Product[] = [];
     id!: string;
     checkoutUrl!: string;
+    totalAmount?: number;
+    taxAmount?: number;
     // userId?: string;
 
-    constructor(id: string, checkoutUrl: string, lines: any) {
+    constructor(id: string, checkoutUrl: string, lines: any, totalAmount?: number, taxAmount?: number) {
         this.id = id;
         this.checkoutUrl = checkoutUrl;
         // this.userId = userId;
@@ -19,8 +21,8 @@ export class Cart {
             product.cartLineId = edge.node.id;
             console.log(`cartLine: ${product.cartLineId}`)
             console.log(`Being add to lines ${product.title}`)
-            this.lines.push(product);          
-          }
+            this.lines.push(product);
+        }
     }
 
 }

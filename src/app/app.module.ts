@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { ContactComponent } from './components/shopify-contact/contact/contact.component';
 import { ShopifyCartComponent } from './components/shopify-cart/shopify-cart/shopify-cart.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -28,8 +30,11 @@ import { ShopifyCartComponent } from './components/shopify-cart/shopify-cart/sho
     AppRoutingModule,
     GraphQLModule,
     HttpClientModule,
-    ApolloModule
+    ApolloModule,
+    FormsModule
   ],
+  schemas:
+    [],
   providers: [],
   bootstrap: [AppComponent]
 })

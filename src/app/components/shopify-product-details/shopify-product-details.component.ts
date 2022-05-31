@@ -64,7 +64,7 @@ export class ShopifyProductDetailsComponent implements OnInit {
   // DO THIS BELOW HOW TO ADD TO EXISTING CARTTTTTT********************
   addToCart() {
     this.sub = this.route.params.subscribe(params => {
-      this.cartService.addToExistingCart(this.localCartId, this.variant?.id).subscribe(result => {
+      this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.product?.quantity).subscribe(result => {
         // this.cart.lines = result.data.cartLinesAdd.cart.lines.edges[0].node.merchandise;
         console.log(`in add to cart${result.data.cartLinesAdd.cart.lines.edges[0].node.merchandise.product}`);
       });
@@ -78,27 +78,11 @@ export class ShopifyProductDetailsComponent implements OnInit {
   createCart() {
     this.cartService.insertNewCart().subscribe(result => {
       let c: any = result.data.cartCreate.cart;
-      // this.cart = new Cart(c);
       this.localCartId = this.cart.id;
       window.localStorage.setItem('localCartId', this.localCartId);
       this.action = "created a new id.";
       console.log(`localCartID = ${this.localCartId} ... we ${this.action}`)
-      // console.log(`Url: ${this.cart.checkoutUrl}`);
-      // console.log(`ID: ${this.cart.id}`)
     })
-  }
-
-  saveCartIdToLocal() {
-
-  }
-
-
-  newGuid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
   }
 
 

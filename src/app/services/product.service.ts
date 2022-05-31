@@ -107,7 +107,7 @@ export class ProductService {
     return this.apollo.watchQuery<Product>({
       query: getProductList,
       variables: {
-        quantity: 13,
+        quantity: 16,
       }
     }).valueChanges;
   }

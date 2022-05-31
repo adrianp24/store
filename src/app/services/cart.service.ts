@@ -81,8 +81,8 @@ query getCartById($id: ID!) {
 // {"cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0LzU5MzkxNDA2M2UxYTk3ZTg2ZTc0YzcwMWJlZmNkYWYz",
 // "variantId": "gid://shopify/ProductVariant/42719158960357"}
 const addToCart = gql`
-mutation AddToCart($cartId: ID!, $variantId: ID!) {
-  cartLinesAdd(cartId: $cartId, lines: [{quantity: 1, merchandiseId: $variantId}]) {
+mutation AddToCart($cartId: ID!, $variantId: ID!, $quantity: Int) {
+  cartLinesAdd(cartId: $cartId, lines: [{quantity: $quantity, merchandiseId: $variantId}]) {
     cart {
       lines(first: 100) {
         edges {
@@ -172,6 +172,89 @@ mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
 }
 `
 
+const updateCartQuantity = gql`
+mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
+    cart {
+      id
+    lines(first: 100) {
+      edges {
+        node {
+          quantity
+          id
+          attributes {
+            value
+          }
+          merchandise {
+            ... on ProductVariant {
+              id
+              product {
+                id
+                description
+                title
+                totalInventory
+                onlineStoreUrl
+                descriptionHtml
+                publishedAt
+                vendor
+                productType
+                variants(first: 10) {
+                  edges {
+                    node {
+                      availableForSale
+                      id
+                      compareAtPrice
+                      price
+                      title
+                    }
+                  }
+                }
+                featuredImage {
+                  id
+                  url
+                  width
+                  height
+                  altText
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    checkoutUrl
+    estimatedCost {
+      totalAmount {
+        amount
+      }
+      totalTaxAmount {
+        amount
+      }
+    }
+      }
+    userErrors {
+      field
+      message
+    }
+  }
+    }
+`
+
+const getCartTotals = gql`
+query getCartTotals($cartId: ID!){
+  cart(id: $cartId){ 
+    estimatedCost{
+      totalAmount{
+        amount
+      }
+    	totalTaxAmount{
+        amount
+      }
+    }
+  }
+}
+`
+
 
 
 @Injectable({
@@ -194,14 +277,14 @@ export class CartService {
     }).valueChanges;
   };
 
-
   //add lines to cart
-  addToExistingCart(cartId: string, variantId: string): Observable<MutationResult<any>> {
+  addToExistingCart(cartId: string, variantId: string, quantity: any): Observable<MutationResult<any>> {
     return this.apollo.mutate({
       mutation: addToCart,
       variables: {
         cartId: cartId,
-        variantId: variantId
+        variantId: variantId,
+        quantity: quantity
       }
     });
   };
@@ -215,6 +298,16 @@ export class CartService {
       }
     });
   };
+
+  updateCartQuantity(cartId: string, lines: any): Observable<MutationResult<any>> {
+    return this.apollo.mutate({
+      mutation: updateCartQuantity,
+      variables: {
+        cartId: cartId,
+        lines: lines
+      }
+    })
+  }
 
 
 

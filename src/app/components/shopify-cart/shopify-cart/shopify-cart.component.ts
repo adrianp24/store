@@ -13,6 +13,7 @@ export class ShopifyCartComponent implements OnInit {
   sub: any;
   cart!: Cart;
   id!: string | null;
+  variant: any;
 
   constructor(
     private cartService: CartService, private route: ActivatedRoute
@@ -36,7 +37,8 @@ export class ShopifyCartComponent implements OnInit {
     alert('inside delete from cart');
     this.sub = this.route.params.subscribe(params => {
       this.cartService.deleteLineFromCart(this.id!, this.cart.lines[i].cartLineId).subscribe(result => {
-         console.log(`CartLine ID: ${this.cart.lines[i].cartLineId}`);
+        // if(this.cart.lines[i].cartLineId === undefined)
+        //  console.log(`CartLine Successfuly deleted`);
       });
     }, (err) => {
       console.error(err)
@@ -44,6 +46,27 @@ export class ShopifyCartComponent implements OnInit {
     console.log('finished initializing');
   }
   // this.cart.lines.splice(i)
+  onQuantityChange(i:number) {
+    this.sub = this.route.params.subscribe(params => {
+      let lines = {
+        attributes: [
+          {
+            key: "quantity",
+            value: `"${this.cart.lines[i].quantity}"`
+          }
+        ],
+        id: this.cart.lines[i].cartLineId,
+        merchandiseId: this.cart.lines[i].variants[0].id,
+        quantity: this.cart.lines[i].quantity
+      };
+      this.cartService.updateCartQuantity(this.id!, lines).subscribe(result => {
+        // FIGURE OUT HOW TO PUT GRAPHQL VARIABLES TO WORK POSTMAN WORKS LFGGGGGGGG
+      });
+    }, (err) => {
+      console.error(err)
+    });
+    console.log('finished initializing');
+  }
 }
 
 

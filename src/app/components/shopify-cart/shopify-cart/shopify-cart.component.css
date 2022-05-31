@@ -39,6 +39,7 @@
 .product-title {
     grid-column: 2/4;
     grid-row: 2/3;
+    font-size: 18px;
     height: fit-content;
     width: fit-content;
     /* flex-direction: row; */
@@ -131,6 +132,15 @@
     vertical-align: top;
 }
 
+.quantity-input {
+    height: 34px;
+    width: 74px;
+    text-align: center;
+    color: white;
+    font-size: 21px;
+    border: 2px solid #efefef;
+}
+
 .add-to-cart {
     width: 300px;
     height: 40px;
@@ -143,7 +153,7 @@
     font-size: 20px;
 }
 
-.hover:hover {
+.quantity-hover:hover {
     border: 2px solid black;
 }
 
@@ -151,57 +161,19 @@
     display: inline-block;
 }
 
-#quantity-title {
-    font-size: 16px;
-    margin-bottom: .1px;
-}
 
-.quantity .input-text.qty {
+/* .quantity .input-text.qty {
     width: 80px;
     height: 39px;
     padding: 0 5px;
     text-align: center;
     background-color: transparent;
     border: 1px solid #efefef;
-}
+} */
 
 .quantity.buttons_added input {
     display: inline-block;
     margin: 0;
     vertical-align: top;
     box-shadow: none;
-}
-
-.quantity.buttons_added .minus,
-.quantity.buttons_added .plus {
-    padding: 7px 10px 8px;
-    height: 41px;
-    /* background-color: #ffffff; */
-    border: 1px solid #efefef;
-    cursor: pointer;
-}
-
-.quantity.buttons_added .minus {
-    border-right: 0;
-}
-
-.quantity.buttons_added .plus {
-    border-left: 0;
-}
-
-.quantity.buttons_added .minus:hover,
-.quantity.buttons_added .plus:hover {
-    background: #eeeeee;
-}
-
-.quantity input::-webkit-outer-spin-button,
-.quantity input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin: 0;
-}
-
-.quantity.buttons_added .minus:focus,
-.quantity.buttons_added .plus:focus {
-    outline: none;
 }

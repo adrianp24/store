@@ -5,12 +5,16 @@ export class Cart {
     id!: string;
     checkoutUrl!: string;
     totalAmount?: number;
-    taxAmount?: number;
+    totalTaxAmount?: number;
     // userId?: string;
 
-    constructor(id: string, checkoutUrl: string, lines: any, totalAmount?: number, taxAmount?: number) {
+    constructor(id: string, checkoutUrl: string, lines: any, totalAmount?: any, totalTaxAmount?: number) {
         this.id = id;
         this.checkoutUrl = checkoutUrl;
+        
+        // this.totalTaxAmount = totalTaxAmount;
+
+        this.totalAmount = totalAmount;
         // this.userId = userId;
         for (let i = 0; i < lines.edges.length; i++) {
             // alert('In for loop to get existing cart')

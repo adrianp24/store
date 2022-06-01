@@ -26,7 +26,8 @@ export class ShopifyCartComponent implements OnInit {
       // this.id = params['id'];
       this.cartService.getExistingCart(this.id!).subscribe(result => {
         let c: any = result.data;
-        this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines);
+        let totalAmount = c.cart.estimatedCost.totalAmount.amount
+        this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines, totalAmount);
         console.log(`This cart ID: ${this.id}`);
         // console.log(`Quantity ${this.cart.lines.edges[0].node.quantity}`)
       })

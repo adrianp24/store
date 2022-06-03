@@ -17,6 +17,11 @@ export class ShopifyStoreComponent implements OnInit {
     private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.getFirstProductList();
+  }
+
+  getFirstProductList() {
+    this.products = [];
     this.productService.getProductList().subscribe(result => {
       let d: any = result.data;
       let products: any = d.products;
@@ -26,5 +31,9 @@ export class ShopifyStoreComponent implements OnInit {
         this.products.push(product);
       }
     });
+  }
+
+  test(){
+    alert('clicked')
   }
 }

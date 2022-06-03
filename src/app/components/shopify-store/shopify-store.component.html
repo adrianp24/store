@@ -4,7 +4,17 @@
     </div>
 
     <div class="product-list-container">
-        <app-shopify-product class="hover" [product]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
-        </app-shopify-product>
+        <table>
+            <tr>
+                <app-shopify-product class="hover" [product]="product" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+                </app-shopify-product>
+            </tr>
+        </table>
     </div>
+    <div class="next-page-container">
+        <div class="next-page-number hover" (click)="getFirstProductList()">1</div>
+        <div class="next-page-number hover" (click)="test()">2</div>
+
+    </div>
+
 </div>

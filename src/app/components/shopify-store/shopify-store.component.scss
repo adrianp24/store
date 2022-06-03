@@ -7,29 +7,35 @@ app-shopify-product {
     flex: 0 0 385px;
     cursor: pointer;
     height: 333px;
+    display: inline;
+    width: 100%;
 }
 
 .hover:hover {
     text-decoration: underline;
 }
 
+.product-list-container table {
+    width: fit-content;
+}
+
 .product-list-container {
     margin-top: 1%;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 30% 30% 30%;
+    // display: grid;
+    // grid-template-columns: 25% 25% 25% 25%;
+    // grid-template-rows: 30% 30% 30%;
     flex-direction: row;
     flex-wrap: wrap;
     height: 100%;
     width: 100%;
     grid-column: 2/3;
-    grid-row: 3/4;
+    grid-row: 2/3;
 }
 
 .store-container {
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 5% 10% 82%;
+    // grid-template-rows: 10% 82%;
     margin: 0%;
 }
 
@@ -47,7 +53,35 @@ app-shopify-product {
 .paragraph-container {
     // padding-top: 3%;
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: 1/2;
     color: lightblue;
     padding: 5%;
+}
+
+.next-page-container {
+    grid-column: 2/3;
+    margin-top: 5%;
+    margin-bottom: 20%;
+    text-align: center;
+    width: 100%;
+}
+
+.next-page-number {
+    width: fit-content;
+    // border: 2px solid red;
+    display: inline;
+    padding: 2%;
+    color: lightgray;
+    width: auto;
+    height: auto;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    font-weight: 400;
+    --font-heading-scale: 1.0;
+    --color-base-text: 255, 255, 255;
+    --color-shadow: 255, 255, 255;
+    font-style: normal;
+    letter-spacing: .01px;
+    text-decoration: none;
+    cursor: pointer;
 }

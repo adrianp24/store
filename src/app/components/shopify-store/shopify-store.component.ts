@@ -11,7 +11,6 @@ import { ProductService } from '../../services/product.service'
 })
 export class ShopifyStoreComponent implements OnInit {
   products: Product[] = [];
-  // variants: Variant[] = [];
 
   constructor(
     private productService: ProductService) { }
@@ -23,6 +22,23 @@ export class ShopifyStoreComponent implements OnInit {
   getFirstProductList() {
     this.products = [];
     this.productService.getProductList().subscribe(result => {
+      let d: any = result.data;
+      let products: any = d.products;
+      let edges: any = products.edges;
+      for (const edge of edges) {
+        let product = new Product(edge.node);
+        this.products.push(product);
+      }
+    });
+  }
+
+  getSecondProductList() {
+    this.products = [];
+    for (let i = 0; i < this.products.length; i++) {
+      this.products[i].variants= [];
+      
+    }
+    this.productService.getSecondProductList().subscribe(result => {
       let d: any = result.data;
       let products: any = d.products;
       let edges: any = products.edges;

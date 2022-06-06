@@ -12,6 +12,8 @@ import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { ContactComponent } from './components/shopify-contact/contact/contact.component';
 import { ShopifyCartComponent } from './components/shopify-cart/shopify-cart/shopify-cart.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms';
     GraphQLModule,
     HttpClientModule,
     ApolloModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatBadgeModule
   ],
   schemas:
     [],

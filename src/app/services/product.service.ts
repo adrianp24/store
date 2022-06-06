@@ -56,6 +56,8 @@ query productList($quantity: Int!){
 }
 `;
 
+
+
 // used for product description
 const getProduct = gql`
 query GetProductsById($id: ID!) {
@@ -89,7 +91,46 @@ query GetProductsById($id: ID!) {
     }
   }
 }
-`;
+`
+
+const getSecondPageProducts = gql`
+{
+  products(first: 12 after: "eyJsYXN0X2lkIjo3NzE3ODM1ODMzNTczLCJsYXN0X3ZhbHVlIjoiNzcxNzgzNTgzMzU3MyJ9") {
+      edges {
+      cursor
+          node {
+        id
+        title
+        description
+        variants(first: 10) {
+    edges {
+      node {
+              id
+              price
+              availableForSale
+              title
+            }
+          }
+        }
+  featuredImage {
+          url
+        }
+        images(first: 10) {
+    edges {
+      node {
+              url
+              id
+              height
+              width
+              altText
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
 
 @Injectable({
   providedIn: 'root'
@@ -119,6 +160,13 @@ export class ProductService {
       variables: {
         id: id,
       }
+    }).valueChanges;
+
+  }
+
+  getSecondProductList() {
+    return this.apollo.watchQuery<Product>({
+      query: getSecondPageProducts,
     }).valueChanges;
 
   }

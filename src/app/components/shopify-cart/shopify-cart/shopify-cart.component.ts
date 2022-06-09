@@ -10,10 +10,11 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./shopify-cart.component.css']
 })
 export class ShopifyCartComponent implements OnInit {
-  sub: any;
-  cart!: Cart;
-  id!: string | null;
-  variant: any;
+  sub: any;                               
+  cart!: Cart;                               
+  id!: string | null;                               
+  variant: any;                               
+  isCartEmpty: boolean = true;                               
 
   constructor(
     private cartService: CartService, private route: ActivatedRoute
@@ -21,33 +22,33 @@ export class ShopifyCartComponent implements OnInit {
 
   // FINISH THIS USE PRODUCT AS EXAMPLE
   ngOnInit(): void {
-    this.id = window.localStorage.getItem('localCartId');
     this.sub = this.route.params.subscribe(params => {
-      // this.id = params['id'];
+    this.id = window.localStorage.getItem('localCartId');
       this.cartService.getExistingCart(this.id!).subscribe(result => {
         let c: any = result.data;
-        let totalAmount = c.cart.estimatedCost.totalAmount.amount
+        let totalAmount = c.cart.estimatedCost.totalAmount.amount;
         this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines, totalAmount);
         console.log(`This cart ID: ${this.id}`);
         // console.log(`Quantity ${this.cart.lines.edges[0].node.quantity}`)
+        this.checkCartEmpty();
+
       })
     })
   }
 
   onDeleteFromCart(i: number) {
-    alert('inside delete from cart');
     this.sub = this.route.params.subscribe(params => {
       this.cartService.deleteLineFromCart(this.id!, this.cart.lines[i].cartLineId).subscribe(result => {
         // if(this.cart.lines[i].cartLineId === undefined)
         //  console.log(`CartLine Successfuly deleted`);
+        this.checkCartEmpty();
       });
     }, (err) => {
       console.error(err)
     });
-    console.log('finished initializing');
   }
   // this.cart.lines.splice(i)
-  onQuantityChange(i:number) {
+  onQuantityChange(i: number) {
     this.sub = this.route.params.subscribe(params => {
       let lines = {
         attributes: [
@@ -68,6 +69,14 @@ export class ShopifyCartComponent implements OnInit {
     });
     console.log('finished initializing');
   }
+
+  checkCartEmpty() {
+    if (this.cart.lines.length > 0) {
+      this.isCartEmpty = false
+    }
+  }
+
+
 }
 
 

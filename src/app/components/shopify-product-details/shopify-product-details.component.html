@@ -1,7 +1,5 @@
 <div class="product-details-container">
 
-
-
     <div class="product-details-block">
         <div class="title">
             {{product?.title}}
@@ -13,12 +11,10 @@
 
         </div>
 
-
-
         <div class="quantity buttons_added">
 
             <div id="quantity-title">Quantity</div>
-            <input class="quantity-input hover" type="number" [(ngModel)]="1 || product.quantity" min="1" max="5">
+            <input class="quantity-input hover" type="number" [(ngModel)]="quantity" min="1" max="5">
         </div>
 
         <div>
@@ -39,7 +35,6 @@
     <div class="images-not-featured" *ngIf="product?.images!=undefined">
         <img *ngIf="product.images[0]" class="images-not-featured-0" [src]="product.images[0]?.url ">
         <img *ngIf="product.images[1]" class="images-not-featured-1" [src]="product.images[1]?.url ">
-
     </div>
 
 </div>

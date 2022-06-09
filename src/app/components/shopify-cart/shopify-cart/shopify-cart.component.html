@@ -7,7 +7,11 @@
         <a class="continue-shopping link" routerLink="/store">Continue Shopping</a>
     </div>
 
-    <div class="product-list-container">
+    <div class="product-list-container" *ngIf="isCartEmpty">
+        <div class="empty-cart">Cart Is Empty</div>
+    </div>
+
+    <div class="product-list-container" *ngIf="!isCartEmpty">
         <table>
             <tr *ngFor="let product of cart?.lines; let i = index">
                 <td><img class="product-img" [src]="product?.featuredImage?.url"></td>
@@ -16,7 +20,10 @@
                     <div id="quantity-title">Quantity</div>
                     <input class="quantity-input quantity-hover" type="number" (change)="onQuantityChange(i)" [(ngModel)]="product!.quantity" min="1" max="5">
                 </td>
-                <td><button class="product-delete" (click)="onDeleteFromCart(i)">delete</button></td>
+                <!-- <td><button class="product-delete" (click)="onDeleteFromCart(i)">delete</button></td> -->
+                <td><i class="material-icons product-delete" (click)="onDeleteFromCart(i)"><span class="material-symbols-outlined">
+                    delete_outline
+                    </span></i></td>
                 <td class="product-price">${{product.price}}</td>
 
 
@@ -28,7 +35,7 @@
 
     <div class="cart-totals-container">
         <div class="cart-subtotal">Subtotal</div>
-        <div>${{cart?.totalAmount}} USD</div>
+        <div class="cart-amount">${{cart?.totalAmount}} USD</div>
     </div>
 
 

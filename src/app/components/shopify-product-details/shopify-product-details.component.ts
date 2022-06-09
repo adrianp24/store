@@ -14,7 +14,6 @@ import { ProductService } from '../../services/product.service'
 })
 export class ShopifyProductDetailsComponent implements OnInit {
   variant!: Variant;
-  model: Product | undefined;
   product!: Product;
   id!: string;
   sub: any;
@@ -22,6 +21,7 @@ export class ShopifyProductDetailsComponent implements OnInit {
   cart!: Cart;
   localCartId!: any;
   action?: string;
+  quantity: number = 1;
 
 
   constructor(private route: ActivatedRoute,
@@ -36,15 +36,10 @@ export class ShopifyProductDetailsComponent implements OnInit {
         this.product = new Product(d.product);
         this.variant = this.product.variants[0];
         this.images = this.product.images;
-        console.log(`This is productID: ${this.product.id}`)
-        console.log(` images link:${this.images[0].url}`)
-        console.log('finished loading products');
-        console.log(`Variant ID: ${this.variant.id}`)
       });
     }, (err) => {
       console.error(err)
     });
-    console.log('finished initializing');
   }
 
   onAddToCartClick() {
@@ -58,13 +53,13 @@ export class ShopifyProductDetailsComponent implements OnInit {
       console.log(`localCartID = ${this.localCartId} ... we ${this.action}`);
       this.addToCart();
     }
-    // need to create after this if else or during create
   }
 
   // DO THIS BELOW HOW TO ADD TO EXISTING CARTTTTTT********************
   addToCart() {
     this.sub = this.route.params.subscribe(params => {
-      this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.product?.quantity).subscribe(result => {
+      // this.product.quantity = this.quantity;
+      this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.quantity).subscribe(result => {
         // this.cart.lines = result.data.cartLinesAdd.cart.lines.edges[0].node.merchandise;
         console.log(`in add to cart${result.data.cartLinesAdd.cart.lines.edges[0].node.merchandise.product}`);
       });
@@ -84,6 +79,8 @@ export class ShopifyProductDetailsComponent implements OnInit {
       console.log(`localCartID = ${this.localCartId} ... we ${this.action}`)
     })
   }
+
+  
 
 
 }

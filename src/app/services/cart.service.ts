@@ -83,22 +83,66 @@ query getCartById($id: ID!) {
 const addToCart = gql`
 mutation AddToCart($cartId: ID!, $variantId: ID!, $quantity: Int) {
   cartLinesAdd(cartId: $cartId, lines: [{quantity: $quantity, merchandiseId: $variantId}]) {
-    cart {
-      lines(first: 100) {
-        edges {
-          node {
-            id
-            quantity
+   cart {
+          id
+    lines(first: 100) {
+      edges {
+        node {
+          quantity
+          id
+          attributes {
+            value
+          }
           merchandise {
             ... on ProductVariant {
+              id
               product {
+                id
+                description
                 title
+                totalInventory
+                onlineStoreUrl
+                descriptionHtml
+                publishedAt
+                vendor
+                productType
+                variants(first: 10) {
+                  edges {
+                    node {
+                      availableForSale
+                      id
+                      compareAtPrice
+                      price
+                      title
+                    }
+                  }
+                }
+                featuredImage {
+                  id
+                  url
+                  width
+                  height
+                  altText
                 }
               }
             }
           }
         }
       }
+    }
+    checkoutUrl
+    estimatedCost {
+      totalAmount {
+        amount
+      }
+      totalTaxAmount {
+        amount
+      }
+    }
+      }
+    userErrors {
+      field
+      message
     }
   }
 }

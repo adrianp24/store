@@ -29,9 +29,7 @@ export class ShopifyCartComponent implements OnInit {
         let totalAmount = c.cart.estimatedCost.totalAmount.amount;
         this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines, totalAmount);
         console.log(`This cart ID: ${this.id}`);
-        // console.log(`Quantity ${this.cart.lines.edges[0].node.quantity}`)
         this.checkCartEmpty();
-
       })
     })
   }
@@ -39,8 +37,6 @@ export class ShopifyCartComponent implements OnInit {
   onDeleteFromCart(i: number) {
     this.sub = this.route.params.subscribe(params => {
       this.cartService.deleteLineFromCart(this.id!, this.cart.lines[i].cartLineId).subscribe(result => {
-        // if(this.cart.lines[i].cartLineId === undefined)
-        //  console.log(`CartLine Successfuly deleted`);
         this.checkCartEmpty();
       });
     }, (err) => {

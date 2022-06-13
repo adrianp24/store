@@ -58,15 +58,12 @@ export class ShopifyProductDetailsComponent implements OnInit {
   // DO THIS BELOW HOW TO ADD TO EXISTING CARTTTTTT********************
   addToCart() {
     this.sub = this.route.params.subscribe(params => {
-      // this.product.quantity = this.quantity;
       this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.quantity).subscribe(result => {
-        // this.cart.lines = result.data.cartLinesAdd.cart.lines.edges[0].node.merchandise;
         console.log(`in add to cart${result.data.cartLinesAdd.cart.lines.edges[0].node.merchandise.product}`);
       });
     }, (err) => {
       console.error(err)
     }); 
-    console.log('finished initializing');
     }
 
 

@@ -2,11 +2,11 @@
 
     <div class="product-details-block">
         <div class="title">
-            {{product?.title}}
+            {{product.title}}
         </div><br>
 
         <div class="price">
-            Price: ${{variant?.price}} USD <br>
+            Price: ${{variant.price}} USD <br>
             <div class="shipping-detail"> Shipping is calculated at checkout.</div>
 
         </div>
@@ -22,19 +22,19 @@
         </div>
 
         <p class="description">
-            {{product?.description}}
+            {{product.description}}
         </p>
 
     </div>
 
 
     <div class="image">
-        <img class="image" [src]="product?.featuredImage?.url">
+        <img class="image" [src]="product.featuredImage.url">
     </div><br>
 
     <div class="images-not-featured" *ngIf="product?.images!=undefined">
-        <img *ngIf="product.images[0]" class="images-not-featured-0" [src]="product.images[0]?.url ">
-        <img *ngIf="product.images[1]" class="images-not-featured-1" [src]="product.images[1]?.url ">
+        <img *ngIf="product.images[0]" class="images-not-featured-0" [src]="product.images[0].url ">
+        <img *ngIf="product.images[1]" class="images-not-featured-1" [src]="product.images[1].url ">
     </div>
 
 </div>

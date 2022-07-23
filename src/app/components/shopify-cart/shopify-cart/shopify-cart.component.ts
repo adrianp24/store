@@ -26,8 +26,7 @@ export class ShopifyCartComponent implements OnInit {
     this.id = window.localStorage.getItem('localCartId');
       this.cartService.getExistingCart(this.id!).subscribe(result => {
         let c: any = result.data;
-        let totalAmount = c.cart.estimatedCost.totalAmount.amount;
-        this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines, totalAmount);
+        this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines, c.cart.estimatedCost.totalAmount.amount);
         console.log(`This cart ID: ${this.id}`);
         this.checkCartEmpty();
       })
@@ -71,7 +70,6 @@ export class ShopifyCartComponent implements OnInit {
       this.isCartEmpty = false
     }
   }
-
 
 }
 

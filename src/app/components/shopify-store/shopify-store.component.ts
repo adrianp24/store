@@ -34,9 +34,9 @@ export class ShopifyStoreComponent implements OnInit {
 
   getSecondProductList() {
     this.products = [];
+    
     for (let i = 0; i < this.products.length; i++) {
       this.products[i].variants= [];
-      
     }
     this.productService.getSecondProductList().subscribe(result => {
       let d: any = result.data;
@@ -49,7 +49,5 @@ export class ShopifyStoreComponent implements OnInit {
     });
   }
 
-  test(){
-    alert('clicked')
-  }
+
 }

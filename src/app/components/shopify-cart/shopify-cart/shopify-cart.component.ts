@@ -23,10 +23,14 @@ export class ShopifyCartComponent implements OnInit {
   // FINISH THIS USE PRODUCT AS EXAMPLE
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-    this.id = window.localStorage.getItem('localCartId');
+      // ********** to fix cart I need localcartId to match the cart if one is created or old
+      // only works if I manually put
+      // on add to cart I should know if cartId existing is too old
+    this.id = window.sessionStorage.getItem('localCartId');
+    // this.id = "Z2lkOi8vc2hvcGlmeS9DYXJ0LzlkNjg0ZDM4ZGUwYTQ4MDgyZjBhYzg0YjI1ZGNmNjM2";
       this.cartService.getExistingCart(this.id!).subscribe(result => {
         let c: any = result.data;
-        this.cart = new Cart(c.id, c.cart.checkoutUrl, c.cart.lines, c.cart.estimatedCost.totalAmount.amount);
+        this.cart = new Cart(this.id!, c.cart.checkoutUrl, c.cart.lines, c.cart.estimatedCost.totalAmount.amount);
         console.log(`This cart ID: ${this.id}`);
         this.checkCartEmpty();
       })

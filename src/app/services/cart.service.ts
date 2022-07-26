@@ -14,6 +14,84 @@ const insertCart = gql`
   }
 `;
 
+const createCartAndAddLine = gql`
+mutation createCartAndAddLine ( $variantId: ID!, $quantity: Int) {
+  cartCreate(
+    input: {
+      lines: [
+        {
+          quantity: $quantity
+          merchandiseId:$variantId
+        }
+      ]
+      attributes: { key: "cart_attribute", value: "This is a cart attribute" }
+    }
+  ) {
+   cart {
+          id
+    lines(first: 100) {
+      edges {
+        node {
+          quantity
+          id
+          attributes {
+            value
+          }
+          merchandise {
+            ... on ProductVariant {
+              id
+              product {
+                id
+                description
+                title
+                totalInventory
+                onlineStoreUrl
+                descriptionHtml
+                publishedAt
+                vendor
+                productType
+                variants(first: 10) {
+                  edges {
+                    node {
+                      availableForSale
+                      id
+                      compareAtPrice
+                      price
+                      title
+                    }
+                  }
+                }
+                featuredImage {
+                  id
+                  url
+                  width
+                  height
+                  altText
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    checkoutUrl
+    estimatedCost {
+      totalAmount {
+        amount
+      }
+      totalTaxAmount {
+        amount
+      }
+    }
+      }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+`
+
 const getCart = gql`
 query getCartById($id: ID!) {
   cart(id: $id) {
@@ -332,6 +410,16 @@ export class CartService {
       }
     });
   };
+
+  createCartAndAddLine(variantId: string, quantity: any): Observable<MutationResult<any>> {
+    return this.apollo.mutate ({
+      mutation: createCartAndAddLine,
+      variables: {
+        variantId: variantId,
+        quantity: quantity
+      }
+    })
+  }
 
   deleteLineFromCart(cartId: string, linesIds: any): Observable<MutationResult<any>> {
     return this.apollo.mutate({

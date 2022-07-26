@@ -43,10 +43,10 @@ export class ShopifyProductDetailsComponent implements OnInit {
   }
 
   onAddToCartClick() {
-    this.localCartId = window.localStorage.getItem('localCartId');
+    this.localCartId = window.sessionStorage.getItem('localCartId');
     if (this.localCartId === null) {
-      this.createCart();
-      this.addToCart();
+      this.createCartAndAddLine();
+      // this.addToCart();
       // this creates new CART ID AND NEW CART ******
     } else {
       this.action = "used existing id.";
@@ -59,24 +59,40 @@ export class ShopifyProductDetailsComponent implements OnInit {
   addToCart() {
     this.sub = this.route.params.subscribe(params => {
       this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.quantity).subscribe(result => {
+        debugger;
       });
     }, (err) => {
       console.error(err)
-    }); 
-    }
+    });
+  }
 
 
-  createCart() {
-    this.cartService.insertNewCart().subscribe(result => {
+  // createCart() {
+  //   this.cartService.insertNewCart().subscribe(result => {
+  //     let c: any = result.data.cartCreate.cart;
+  //     // should work with code under shouldnt have to manualy input************** FIX
+  //     // this.localCartId = "Z2lkOi8vc2hvcGlmeS9DYXJ0LzlkNjg0ZDM4ZGUwYTQ4MDgyZjBhYzg0YjI1ZGNmNjM2"
+  //     ///////by changing to session storage and c.id mightve fixed bug
+  //     this.localCartId = c.id;
+  //     window.sessionStorage.setItem('localCartId', this.localCartId);
+  //     this.action = "created a new id.";
+  //     console.log(`localCartID = ${this.localCartId} ... we ${this.action}`)
+  //   })
+  // }
+
+  // creates while adding
+  createCartAndAddLine() {
+    this.cartService.createCartAndAddLine(this.variant?.id, this.quantity).subscribe(result => {
       let c: any = result.data.cartCreate.cart;
-      this.localCartId = this.cart.id;
-      window.localStorage.setItem('localCartId', this.localCartId);
-      this.action = "created a new id.";
+      this.localCartId = c.id;
+      window.sessionStorage.setItem('localCartId', this.localCartId);
+      this.action = "CREATED NEW CART.";
       console.log(`localCartID = ${this.localCartId} ... we ${this.action}`)
+      console.log(`Lines Added = ${this.variant?.id} Quantity ${ this.quantity}`)
     })
   }
 
-  
+
 
 
 }

@@ -1,14 +1,24 @@
 <div class="store-link-container">
-    <h1 id="header">coolgifts </h1>
-    <!-- <a class="link" id="store-link" routerLink="/store">Home</a> -->
-    <a class="link" id="contact-link" routerLink="/contact">Contact</a>
-    <!-- <a class="link" id="cart-link" routerLink="/cart">Cart</a> -->
-    <mat-icon id="store-link" routerLink="/store" matBadgeColor="warn">home</mat-icon>
-    <mat-icon class="material-icons" matBadge="15" id="cart-link" routerLink="/cart"><span class="material-symbols-outlined">
-        shopping_cart_checkout
-        </span></mat-icon>
-
-
+    <table>
+        <tr>
+            <td>
+                <div id="header">coolgifts </div>
+            </td>
+            <td>
+                <mat-icon class="material-symbols-outlined" id="contact-link" routerLink="/contact">
+                    info
+                </mat-icon>
+            </td>
+            <td>
+                <mat-icon id="store-link" routerLink="/store" matBadgeColor="warn">home</mat-icon>
+            </td>
+            <td>
+                <mat-icon class="material-icons" matBadge="15" id="cart-link" routerLink="/cart"><span class="material-symbols-outlined">
+                        shopping_cart_checkout
+                    </span></mat-icon>
+            </td>
+        </tr>
+    </table>
 </div>
 
 

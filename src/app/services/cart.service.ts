@@ -154,10 +154,6 @@ query getCartById($id: ID!) {
 }
 `;
 
-
-// query variables for addtocart
-// {"cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0LzU5MzkxNDA2M2UxYTk3ZTg2ZTc0YzcwMWJlZmNkYWYz",
-// "variantId": "gid://shopify/ProductVariant/42719158960357"}
 const addToCart = gql`
 mutation AddToCart($cartId: ID!, $variantId: ID!, $quantity: Int) {
   cartLinesAdd(cartId: $cartId, lines: [{quantity: $quantity, merchandiseId: $variantId}]) {
@@ -362,23 +358,6 @@ mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
     }
 `
 
-const getCartTotals = gql`
-query getCartTotals($cartId: ID!){
-  cart(id: $cartId){ 
-    estimatedCost{
-      totalAmount{
-        amount
-      }
-    	totalTaxAmount{
-        amount
-      }
-    }
-  }
-}
-`
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -412,7 +391,7 @@ export class CartService {
   };
 
   createCartAndAddLine(variantId: string, quantity: any): Observable<MutationResult<any>> {
-    return this.apollo.mutate ({
+    return this.apollo.mutate({
       mutation: createCartAndAddLine,
       variables: {
         variantId: variantId,
@@ -440,8 +419,5 @@ export class CartService {
       }
     })
   }
-
-  
-
 
 }

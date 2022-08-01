@@ -5,6 +5,8 @@ import { Image } from 'src/app/models/image';
 import { Product } from 'src/app/models/product';
 import { Variant } from 'src/app/models/variant';
 import { CartService } from 'src/app/services/cart.service';
+import { GlobalConstants } from 'src/app/services/global-constants.service';
+import { MessageService } from 'src/app/services/message.service';
 import { ProductService } from '../../services/product.service'
 
 @Component({
@@ -18,13 +20,12 @@ export class ShopifyProductDetailsComponent implements OnInit {
   id!: string;
   sub: any;
   images: Image[] = []
-  cart!: Cart;
   localCartId!: any;
   action?: string;
   quantity: number = 1;
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute, private messageService: MessageService,
     private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class ShopifyProductDetailsComponent implements OnInit {
       this.productService.getProduct(this.id).subscribe(result => {
         let d: any = result.data;
         this.product = new Product(d.product);
+        console.log(`Title ${this.product.title}`)
         this.variant = this.product.variants[0];
         this.images = this.product.images;
       });
@@ -59,7 +61,19 @@ export class ShopifyProductDetailsComponent implements OnInit {
   addToCart() {
     this.sub = this.route.params.subscribe(params => {
       this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.quantity).subscribe(result => {
-        debugger;
+        // // count query under this
+        // this.cartService.getCartItemCount(this.id).subscribe(result => {
+        //   let line = result.data.lines.edges
+          
+        //   this.messageService.sendMessage(GlobalConstants.CountUpdate, result);
+        // })
+        this.cartService.getExistingCart(this.localCartId).subscribe(result => {
+          let c: any = result.data;
+          let cart = new Cart(this.localCartId, c.cart.checkoutUrl, c.cart.lines, c.cart.estimatedCost.totalAmount.amount);
+          console.log(`This cart ID: ${this.id}`);
+          this.messageService.sendMessage(GlobalConstants.CountUpdate, cart.getCartQuantity());
+          
+        })
       });
     }, (err) => {
       console.error(err)
@@ -88,7 +102,7 @@ export class ShopifyProductDetailsComponent implements OnInit {
       window.sessionStorage.setItem('localCartId', this.localCartId);
       this.action = "CREATED NEW CART.";
       console.log(`localCartID = ${this.localCartId} ... we ${this.action}`)
-      console.log(`Lines Added = ${this.variant?.id} Quantity ${ this.quantity}`)
+      console.log(`Lines Added = ${this.variant?.id} Quantity ${this.quantity}`)
     })
   }
 

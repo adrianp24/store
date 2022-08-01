@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Cart } from './models/cart';
+import { GlobalConstants } from './services/global-constants.service';
+import { MessageService } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
   title = 'store';
- 
+  subscription: any;
+  count: number = 2;
+
+  constructor(private messageService: MessageService) {
+  }
+
+  
+  ngOnInit(): void {
+    this.subscription = this.messageService.getMessage(GlobalConstants.CountUpdate)?.subscribe(message => {
+      this.count = message;
+    });
+  }
 }

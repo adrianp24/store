@@ -10,11 +10,11 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./shopify-cart.component.css']
 })
 export class ShopifyCartComponent implements OnInit {
-  sub: any;                               
-  cart!: Cart;                               
-  id!: string | null;                               
-  variant: any;                               
-  isCartEmpty: boolean = true;                               
+  sub: any;
+  cart!: Cart;
+  id!: string | null;
+  variant: any;
+  isCartEmpty: boolean = true;
 
   constructor(
     private cartService: CartService, private route: ActivatedRoute
@@ -26,8 +26,8 @@ export class ShopifyCartComponent implements OnInit {
       // ********** to fix cart I need localcartId to match the cart if one is created or old
       // only works if I manually put
       // on add to cart I should know if cartId existing is too old
-    this.id = window.sessionStorage.getItem('localCartId');
-    // this.id = "Z2lkOi8vc2hvcGlmeS9DYXJ0LzlkNjg0ZDM4ZGUwYTQ4MDgyZjBhYzg0YjI1ZGNmNjM2";
+      this.id = window.sessionStorage.getItem('localCartId');
+      // this.id = "Z2lkOi8vc2hvcGlmeS9DYXJ0LzlkNjg0ZDM4ZGUwYTQ4MDgyZjBhYzg0YjI1ZGNmNjM2";
       this.cartService.getExistingCart(this.id!).subscribe(result => {
         let c: any = result.data;
         this.cart = new Cart(this.id!, c.cart.checkoutUrl, c.cart.lines, c.cart.estimatedCost.totalAmount.amount);
@@ -59,6 +59,7 @@ export class ShopifyCartComponent implements OnInit {
         id: this.cart.lines[i].cartLineId,
         merchandiseId: this.cart.lines[i].variants[0].id,
         quantity: this.cart.lines[i].quantity
+        
       };
       this.cartService.updateCartQuantity(this.id!, lines).subscribe(result => {
         // FIGURE OUT HOW TO PUT GRAPHQL VARIABLES TO WORK POSTMAN WORKS LFGGGGGGGG
@@ -74,6 +75,9 @@ export class ShopifyCartComponent implements OnInit {
       this.isCartEmpty = false
     }
   }
+
+
+  
 
 }
 

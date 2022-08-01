@@ -2,7 +2,6 @@ import { Image } from "./image";
 
 export class Variant {
     id!: string;
-    // image!: Image;
     price!: number;
     availableForSale!: boolean;
     title!: string;

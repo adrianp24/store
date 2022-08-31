@@ -11,11 +11,7 @@ export class Cart {
     constructor(id: string, checkoutUrl: string, lines: any, totalAmount?: any, totalTaxAmount?: number) {
         this.id = id;
         this.checkoutUrl = checkoutUrl;
-
-        // this.totalTaxAmount = totalTaxAmount;
-
         this.totalAmount = totalAmount;
-        // this.userId = userId;
         for (let i = 0; i < lines.edges.length; i++) {
             let edge = lines.edges[i];
             let product = new Product(edge.node.merchandise.product);

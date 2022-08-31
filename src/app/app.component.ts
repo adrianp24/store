@@ -11,7 +11,7 @@ import { MessageService } from './services/message.service';
 export class AppComponent {
   title = 'store';
   subscription: any;
-  count: number = 2;
+  count?: number;
 
   constructor(private messageService: MessageService) {
   }

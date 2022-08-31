@@ -61,18 +61,11 @@ export class ShopifyProductDetailsComponent implements OnInit {
   addToCart() {
     this.sub = this.route.params.subscribe(params => {
       this.cartService.addToExistingCart(this.localCartId, this.variant?.id, this.quantity).subscribe(result => {
-        // // count query under this
-        // this.cartService.getCartItemCount(this.id).subscribe(result => {
-        //   let line = result.data.lines.edges
-          
-        //   this.messageService.sendMessage(GlobalConstants.CountUpdate, result);
-        // })
         this.cartService.getExistingCart(this.localCartId).subscribe(result => {
           let c: any = result.data;
           let cart = new Cart(this.localCartId, c.cart.checkoutUrl, c.cart.lines, c.cart.estimatedCost.totalAmount.amount);
           console.log(`This cart ID: ${this.id}`);
           this.messageService.sendMessage(GlobalConstants.CountUpdate, cart.getCartQuantity());
-          
         })
       });
     }, (err) => {

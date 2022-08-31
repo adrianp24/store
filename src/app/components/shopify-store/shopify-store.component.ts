@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { Cart } from 'src/app/models/cart';
 import { Variant } from 'src/app/models/variant';
+import { GlobalConstants } from 'src/app/services/global-constants.service';
+import { MessageService } from 'src/app/services/message.service';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service'
 
@@ -13,10 +16,11 @@ export class ShopifyStoreComponent implements OnInit {
   products: Product[] = [];
 
   constructor(
-    private productService: ProductService) { }
+    private productService: ProductService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getFirstProductList();
+
   }
 
   getFirstProductList() {

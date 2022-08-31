@@ -18,7 +18,7 @@
                 <td class="product-title hover" [routerLink]="['/product', product.id]">{{product.title}}</td>
                 <td class="buttons_added">
                     <div id="quantity-title">Quantity</div>
-                    <input class="quantity-input quantity-hover" type="number" (change)="onQuantityChange(i)" [(ngModel)]="product!.quantity" min="1" max="5">
+                    <input class="quantity-input quantity-hover" type="number" (change)="onQuantityChange(i)" [(ngModel)]="product!.quantity" min="1" max="25">
                 </td>
                 <!-- <td><button class="product-delete" (click)="onDeleteFromCart(i)">delete</button></td> -->
                 <td><i class="material-icons product-delete" (click)="onDeleteFromCart(i)"><span class="material-symbols-outlined">

@@ -23,7 +23,7 @@ export class Product {
         this.featuredImage = product.featuredImage;
         this.quantity = product.quantity;
         this.cartLineId = product.cartLineId;
-        // error only  
+
         if (product.images != undefined) {
             for (const image of product?.images?.edges) {
                 this.images.push(new Image(image.node))
